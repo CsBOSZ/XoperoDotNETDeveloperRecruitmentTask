@@ -21,9 +21,15 @@ public class DeviceController : ControllerBase
    } 
    
    [HttpGet("pages")]
-   public int GetDevices()
+   public int GetPages()
    {
       return _deviceService.Pages();
+   }
+   
+   [HttpGet("pages/{name}")]
+   public int GetPagesByName([FromRoute]string name)
+   {
+      return _deviceService.Pages(name);
    }
 
    [HttpGet("{page}")]
@@ -37,6 +43,11 @@ public class DeviceController : ControllerBase
    {
       return _deviceService.SearchByName(name);
    }
+   [HttpGet("searchByName/{name}/{page}")]
+   public IEnumerable<Device> SearchDevicePage([FromRoute]String name,[FromRoute]int page)
+   {
+      return _deviceService.SearchByName(name,page);
+   }
    
    [HttpGet("/DeviceOdt/{page}")]
    public IEnumerable<DeviceOdt> GetDevicesOdt([FromRoute]int page)
@@ -48,6 +59,12 @@ public class DeviceController : ControllerBase
    public IEnumerable<DeviceOdt> SearchDeviceOdt([FromRoute]String name)
    {
       return DeviceService.ToOdt(_deviceService.SearchByName(name));
+   }
+   
+   [HttpGet("/DeviceOdt/searchByName/{name}/{page}")]
+   public IEnumerable<Device> SearchDevicePageOdt([FromRoute]String name,[FromRoute]int page)
+   {
+      return _deviceService.SearchByName(name,page);
    }
    
    [HttpPost]

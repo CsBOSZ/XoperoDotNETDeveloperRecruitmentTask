@@ -1,23 +1,14 @@
 namespace xopS;
 
-public class Device 
+public class Device : DeviceOdt
 {
-    public string OSVersion { get; set; }
-    public string MachineName { get; set; }
-    public string UserName { get; set; }
     public string ProcessorName { get; set; }
     public int ProcessorCount { get; set; }
     
-    public DateTime Time { get; set; }
-
-    public Device(string osVersion, string machineName, string userName, string processorName, int processorCount)
+    public Device(string osVersion, string machineName, string userName, string processorName, int processorCount) : base(osVersion,machineName,userName)
     {
-        OSVersion = osVersion;
-        MachineName = machineName;
-        UserName = userName;
         ProcessorName = processorName;
         ProcessorCount = processorCount;
-        Time = DateTime.Now;
     }
 
     public override string ToString()

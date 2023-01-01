@@ -15,6 +15,14 @@ public class DeviceOdt
         Time = time;
     }
 
+    public DeviceOdt(string osVersion, string machineName, string userName)
+    {
+        OSVersion = osVersion;
+        MachineName = machineName;
+        UserName = userName;
+        Time = DateTime.Now;
+    }
+
     public DeviceOdt(Device device)
     {
         OSVersion = device.OSVersion;
@@ -22,6 +30,7 @@ public class DeviceOdt
         UserName = device.UserName;
         Time = device.Time;
     }
+    
 
     public override string ToString()
     {

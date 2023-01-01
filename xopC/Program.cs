@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using xopS;
 using System.Diagnostics;
 using System.Management;
 using System.Text.RegularExpressions;
 using Flurl.Http;
+using xopS.Services;
 
 
 string processorName = null;
@@ -32,6 +32,7 @@ if (System.Environment.OSVersion.Platform == PlatformID.Unix)
 }
 else
 {
+    // TODO nie wiem czy dziala nie mam windows 
     string query = "SELECT Name FROM Win32_Processor";
     ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
 
@@ -53,9 +54,9 @@ Device myDevice = new Device(
 
 int indexPage = 0;
 String indexName = "";
-int maxPage = 4;
-List<Device> page = null;
-List<DeviceOdt> pageOdt = null;
+int maxPage = 0;
+int maxPageSearch = 0;
+List<DeviceOdt> page = new List<DeviceOdt>();
 bool mode = false;
 
 // --------
@@ -67,20 +68,20 @@ void Print()
     Console.WriteLine(
                     $"""
                     options:
-                        Pages: p<0-{maxPage}> | 'p<1>'
-                        Searching: s<name> | 's<arch>' or 's<arch> p<1>'
-                        change mode: | -cm '-cm' or 'p<2> -cm'
+                        Pages: P<0-{maxPage}> | 'P<1>'
+                        Searching: S<name> P<{(maxPageSearch == 0? maxPageSearch : $"0-{maxPageSearch}")}> | 'S<arch>' or 'S<arch> P<{maxPageSearch}>'
+                        change mode: -cm | '-cm' or 'p<2> -cm'
                     [
                     """
         );
-    foreach (var device in (IEnumerable)(mode ? page : pageOdt))
+    foreach (var device in page)
     {   
         Console.WriteLine("{");
         Console.WriteLine(device.ToString());
         Console.WriteLine("}");
     }
     
-    Console.WriteLine($"]\n page: {(indexPage>=0 ? indexPage : "Searching")}");
+    Console.WriteLine($"]\n page: {(indexName == "" ? indexPage : $"{indexPage}\n Searching: {indexName}")}");
     Console.Write("------------\n option: ");
 }
 
@@ -88,25 +89,39 @@ async void GetPage(int p)
 {
     if (p>=0&&p<=maxPage)
     {
-        if (mode)
-        {
-            page = await $"http://localhost:5076/Device/{p}".GetAsync().ReceiveJson<List<Device>>();
-        }
-        
+        page.Clear();
+        var tmp = await $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/{p}".GetAsync().ReceiveJson<List<Device>>();
+        page.AddRange(mode ? tmp : DeviceService.ToOdt(tmp));
+        // page.AddRange(await $"http://localhost:5076/DeviceOdt/{p}".GetAsync().ReceiveJson<List<DeviceOdt>>());
         indexPage = p;
         indexName = "";
+        maxPageSearch = 0;
         Print();
-    }  
+    }
+    else
+    {
+        Console.Write("\n option: ");
+    }
 }
 
 async void Search(String name,int p)
 {
     
-    page = await $"http://localhost:5076/Device/searchByName/{name}".GetAsync().ReceiveJson<List<Device>>();
-    indexPage = -1;
-    indexName = name;
-    Print();
-
+    maxPageSearch = await $"http://localhost:5076/Device/pages/{name}".GetAsync().ReceiveJson<int>();
+    if (p >= 0 && p <= maxPageSearch)
+    {
+        page.Clear();
+        var tmp = await $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync()
+            .ReceiveJson<List<Device>>();
+        page.AddRange(mode ? tmp : DeviceService.ToOdt(tmp));
+        indexPage = p;
+        indexName = name;
+        Print();
+    }
+    else
+    {
+        Console.Write("\n option: ");
+    }
 }
 
 // --------
@@ -119,18 +134,17 @@ HubConnection connection = new HubConnectionBuilder()
 
 connection.On<IEnumerable<Device>,int>("RefreshDevices", (devices,pages) =>
 {
-    page = devices.ToList();
+    page.Clear();
+    page.AddRange(mode ? devices : DeviceService.ToOdt(devices));
     indexPage = 0;
     maxPage = pages;
     Print();
-
 });
 await connection.StartAsync();
 
 // --------
 
 var post = await "http://localhost:5076/Device".PostJsonAsync(myDevice);
-
 
 for (;;)
 {
@@ -141,23 +155,40 @@ for (;;)
     {
         string p = null;
         string s = null;
+        
+        bool cm = r.Contains("-cm");
 
-        if (Regex.IsMatch(r, "p<.*>"))
+        if (Regex.IsMatch(r, "P<.*>"))
         {
-            p = r.Substring(r.IndexOf("p") + 1);
+            p = r.Substring(r.IndexOf("P") + 1);
             p = p.Substring(p.IndexOf("<")+1, p.IndexOf(">") - p.IndexOf("<") - 1).Trim();
         }
 
-        if (Regex.IsMatch(r, "s<.*>"))
+        if (Regex.IsMatch(r, "S<.*>"))
         {
-            s = r.Substring(r.IndexOf("p") + 1);
+            s = r.Substring(r.IndexOf("S") + 1);
             s = s.Substring(s.IndexOf("<")+1, s.IndexOf(">") - s.IndexOf("<") - 1);
         }
 
-       
-        
-        
-        if (s is not null)
+
+        if (cm)
+        {
+            mode = !mode;
+        }
+
+        if (cm && s is null && p is null)
+        {
+            if (indexName == "")
+            {
+                GetPage(indexPage);
+            }
+            else
+            {
+                Search(indexName,0);
+            }
+            
+        }
+        else if (s is not null)
         {
             if (p is not null)
             {
@@ -173,20 +204,6 @@ for (;;)
         {
             GetPage(int.TryParse(p, out var resultP) ? resultP : 0);
         }
-        
-        
-        // if (r.StartsWith("-p"))
-        // {
-        //     if (int.TryParse(r.Substring(r.IndexOf("p") + 1).Trim(), out var resultP))
-        //     {
-        //         GetPage(resultP);
-        //     }
-        // }
-        // else if (r.StartsWith("-s"))
-        // {
-        //     Search(r.Substring(r.IndexOf("s") + 1).Trim());
-        // }
-
     }
 }
 

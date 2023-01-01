@@ -58,14 +58,30 @@ public class DeviceService : IDeviceService
     
     public IEnumerable<Device> SearchByName(string name)
     {
-        foreach (var device in _devices.Where(x => x.UserName.Equals(name)))
+        foreach (var device in _devices.Where(x => x.UserName.Contains(name)))
         {
             yield return device;
         }
 
-        foreach (var device in _devices.Where(x => x.MachineName.Equals(name)))
+        foreach (var device in _devices.Where(x => x.MachineName.Contains(name)))
         {
             yield return device;
+        }
+    }
+
+    public int Pages(string name)
+    {
+        var count = SearchByName(name).Count();
+        return count % _size == 0 ? count / _size - 1 : count / _size;
+    }
+
+    public IEnumerable<Device> SearchByName(string name,int page)
+    {
+        List<Device> device = new List<Device>( SearchByName(name));
+        for (int i = 0+(page*_size); i < _size+(page*_size); i++)
+        {
+            if (device.Count() - 1 >= i)
+                yield return device[i];
         }
     }
 }
