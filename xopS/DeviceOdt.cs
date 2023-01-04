@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace xopS;
 
 public class DeviceOdt
@@ -7,6 +9,7 @@ public class DeviceOdt
     public string UserName { get; set; }
     public DateTime Time { get; set; }
 
+    [JsonConstructor]
     public DeviceOdt(string osVersion, string machineName, string userName , DateTime time)
     {
         OSVersion = osVersion;

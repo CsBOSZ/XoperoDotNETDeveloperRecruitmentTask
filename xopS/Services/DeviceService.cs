@@ -33,13 +33,11 @@ public class DeviceService : IDeviceService
 
     public IEnumerable<Device> GetDevicesPage(int page)
     {
-        
         for (int i = 0+(page*_size); i < _size+(page*_size); i++)
         {
             if (_devices.Count - 1 >= i)
                 yield return _devices[i];
         }
-        
     }
 
     public void Add(Device device)
@@ -58,15 +56,7 @@ public class DeviceService : IDeviceService
     
     public IEnumerable<Device> SearchByName(string name)
     {
-        foreach (var device in _devices.Where(x => x.UserName.Contains(name)))
-        {
-            yield return device;
-        }
-
-        foreach (var device in _devices.Where(x => x.MachineName.Contains(name)))
-        {
-            yield return device;
-        }
+        return _devices.Where(x => x.MachineName.Contains(name) || x.UserName.Contains(name));
     }
 
     public int Pages(string name)
@@ -84,4 +74,10 @@ public class DeviceService : IDeviceService
                 yield return device[i];
         }
     }
+
+    public void DeleteAll()
+    {
+        _devices.Clear();
+    }
+    
 }

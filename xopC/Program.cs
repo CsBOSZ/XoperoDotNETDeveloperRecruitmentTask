@@ -90,9 +90,8 @@ async void GetPage(int p)
     if (p>=0&&p<=maxPage)
     {
         page.Clear();
-        var tmp = await $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/{p}".GetAsync().ReceiveJson<List<Device>>();
-        page.AddRange(mode ? tmp : DeviceService.ToOdt(tmp));
-        // page.AddRange(await $"http://localhost:5076/DeviceOdt/{p}".GetAsync().ReceiveJson<List<DeviceOdt>>());
+        var tmp = $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/{p}".GetAsync();
+        page.AddRange(mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
         indexPage = p;
         indexName = "";
         maxPageSearch = 0;
@@ -111,9 +110,8 @@ async void Search(String name,int p)
     if (p >= 0 && p <= maxPageSearch)
     {
         page.Clear();
-        var tmp = await $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync()
-            .ReceiveJson<List<Device>>();
-        page.AddRange(mode ? tmp : DeviceService.ToOdt(tmp));
+        var tmp =  $"http://localhost:5076/{(mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync();
+        page.AddRange(mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
         indexPage = p;
         indexName = name;
         Print();
@@ -130,7 +128,6 @@ string url = "http://localhost:5076/devicehub";
 HubConnection connection = new HubConnectionBuilder()
     .WithUrl(url)
     .Build();
-    
 
 connection.On<IEnumerable<Device>,int>("RefreshDevices", (devices,pages) =>
 {
@@ -142,9 +139,12 @@ connection.On<IEnumerable<Device>,int>("RefreshDevices", (devices,pages) =>
 });
 await connection.StartAsync();
 
+
 // --------
 
 var post = await "http://localhost:5076/Device".PostJsonAsync(myDevice);
+
+// await connection.InvokeAsync<Task>("AddDevice", myDevice);
 
 for (;;)
 {

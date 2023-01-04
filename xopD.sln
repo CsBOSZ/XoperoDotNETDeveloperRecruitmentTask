@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopS", "xopS\xopS.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopC", "xopC\xopC.csproj", "{8DC1015E-ED0A-420E-82C2-0286930C5463}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopS.Tests", "xopS.Tests\xopS.Tests.csproj", "{546365D7-14B5-4D26-8D32-5EE0A708773A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopS.IntegrationTests", "xopS.IntegrationTests\xopS.IntegrationTests.csproj", "{370F17A6-62B5-48EF-B6D6-AF5496C66196}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{8DC1015E-ED0A-420E-82C2-0286930C5463}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC1015E-ED0A-420E-82C2-0286930C5463}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC1015E-ED0A-420E-82C2-0286930C5463}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546365D7-14B5-4D26-8D32-5EE0A708773A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546365D7-14B5-4D26-8D32-5EE0A708773A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546365D7-14B5-4D26-8D32-5EE0A708773A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546365D7-14B5-4D26-8D32-5EE0A708773A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

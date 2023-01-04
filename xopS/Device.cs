@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace xopS;
 
 public class Device : DeviceOdt
@@ -6,6 +8,13 @@ public class Device : DeviceOdt
     public int ProcessorCount { get; set; }
     
     public Device(string osVersion, string machineName, string userName, string processorName, int processorCount) : base(osVersion,machineName,userName)
+    {
+        ProcessorName = processorName;
+        ProcessorCount = processorCount;
+    }
+    
+    [JsonConstructor]
+    public Device(string osVersion, string machineName, string userName, string processorName, int processorCount , DateTime time) : base(osVersion,machineName,userName,time)
     {
         ProcessorName = processorName;
         ProcessorCount = processorCount;
