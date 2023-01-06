@@ -22,17 +22,17 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    DeviceService ds = new DeviceService();
-    for (int i = 0; i < 5; i++)
-    {
-        ds.Add(new Device(
-                        i.ToString(),
-                        (i+1).ToString(),
-                        i.ToString(),
-                        i.ToString(),
-                        i
-        ));
-    }
+    // DeviceService ds = new DeviceService();
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     ds.Add(new Device(
+    //                     i.ToString(),
+    //                     (i+1).ToString(),
+    //                     i.ToString(),
+    //                     i.ToString(),
+    //                     i
+    //     ));
+    // }
 }
 
 app.UseHttpsRedirection();
@@ -44,3 +44,8 @@ app.MapControllers();
 app.MapHub<DeviceHub>("/devicehub");
 
 app.Run();
+
+public partial class Program
+{
+    
+} 

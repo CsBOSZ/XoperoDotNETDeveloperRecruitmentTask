@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopS.Tests", "xopS.Tests\xo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopS.IntegrationTests", "xopS.IntegrationTests\xopS.IntegrationTests.csproj", "{370F17A6-62B5-48EF-B6D6-AF5496C66196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xopC.IntegrationTests", "xopC.IntegrationTests\xopC.IntegrationTests.csproj", "{9F788923-BF9C-45EA-8285-6E97BB523AF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{370F17A6-62B5-48EF-B6D6-AF5496C66196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F788923-BF9C-45EA-8285-6E97BB523AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F788923-BF9C-45EA-8285-6E97BB523AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F788923-BF9C-45EA-8285-6E97BB523AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F788923-BF9C-45EA-8285-6E97BB523AF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

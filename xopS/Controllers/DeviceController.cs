@@ -33,38 +33,44 @@ public class DeviceController : ControllerBase
    }
 
    [HttpGet("{page}")]
-   public IEnumerable<Device> GetDevices([FromRoute]int page)
+   public ActionResult<IEnumerable<Device>> GetDevices([FromRoute]int page)
    {
-      return _deviceService.GetDevicesPage(page);
+      var devices = _deviceService.GetDevicesPage(page).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    
    [HttpGet("searchByName/{name}")]
-   public IEnumerable<Device> SearchDevice([FromRoute]String name)
+   public ActionResult<IEnumerable<Device>> SearchDevice([FromRoute]String name)
    {
-      return _deviceService.SearchByName(name);
+      var devices = _deviceService.SearchByName(name).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    [HttpGet("searchByName/{name}/{page}")]
-   public IEnumerable<Device> SearchDevicePage([FromRoute]String name,[FromRoute]int page)
+   public ActionResult<IEnumerable<Device>> SearchDevicePage([FromRoute]String name,[FromRoute]int page)
    {
-      return _deviceService.SearchByName(name,page);
+      var devices = _deviceService.SearchByName(name,page).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    
    [HttpGet("/DeviceOdt/{page}")]
-   public IEnumerable<DeviceOdt> GetDevicesOdt([FromRoute]int page)
+   public ActionResult<IEnumerable<DeviceOdt>> GetDevicesOdt([FromRoute]int page)
    {
-      return DeviceService.ToOdt(_deviceService.GetDevicesPage(page));
+      var devices =  DeviceService.ToOdt(_deviceService.GetDevicesPage(page)).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    
    [HttpGet("/DeviceOdt/searchByName/{name}")]
-   public IEnumerable<DeviceOdt> SearchDeviceOdt([FromRoute]String name)
+   public ActionResult<IEnumerable<DeviceOdt>> SearchDeviceOdt([FromRoute]String name)
    {
-      return DeviceService.ToOdt(_deviceService.SearchByName(name));
+      var devices =  DeviceService.ToOdt(_deviceService.SearchByName(name)).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    
    [HttpGet("/DeviceOdt/searchByName/{name}/{page}")]
-   public IEnumerable<Device> SearchDevicePageOdt([FromRoute]String name,[FromRoute]int page)
+   public ActionResult<IEnumerable<DeviceOdt>> SearchDevicePageOdt([FromRoute]String name,[FromRoute]int page)
    {
-      return _deviceService.SearchByName(name,page);
+      var devices =  _deviceService.SearchByName(name,page).ToList();
+      return devices.Count == 0 ? NotFound() : Ok(devices);
    }
    
    [HttpPost]

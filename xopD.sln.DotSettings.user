@@ -1,23 +1,14 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/ActualSeverity/@EntryValue">INFO</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=70ded4cf_002D57d9_002D4e28_002D947a_002D7840562d44ef/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Sort" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;MSTest::546365D7-14B5-4D26-8D32-5EE0A708773A::net7.0::xopS.Tests.Services.DeviceServiceTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/home/bogusz/.cache/JetBrains/Rider2022.3/resharper-host/temp/Rider/vAny/CoverageData/_xopD.2028816066/Snapshot/snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=522ba6cb_002Dd6d4_002D4c6d_002D9fe9_002D7eeb08cb2632/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=83b84dda_002D8b26_002D4bd3_002Db13e_002D7f891f1b7be5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SearchByName_Pagination" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;MSTest::546365D7-14B5-4D26-8D32-5EE0A708773A::net7.0::xopS.Tests.Services.DeviceServiceTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9b8b4fbb_002D7c76_002D4f83_002Da96a_002Dd7cb2407ce1e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Sort #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;MSTest::546365D7-14B5-4D26-8D32-5EE0A708773A::net7.0::xopS.Tests.Services.DeviceServiceTest&lt;/TestId&gt;
-    &lt;TestId&gt;MSTest::546365D7-14B5-4D26-8D32-5EE0A708773A::net7.0::xopS.Tests.UnitTest1.TestMethod1&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9bde923d_002Df060_002D481a_002Dae1d_002D9ad58e3b6152/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Sort #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;MSTest::546365D7-14B5-4D26-8D32-5EE0A708773A::net7.0::xopS.Tests.Services.DeviceServiceTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	
+	
+	
+	
+	
+	
+	</wpf:ResourceDictionary>

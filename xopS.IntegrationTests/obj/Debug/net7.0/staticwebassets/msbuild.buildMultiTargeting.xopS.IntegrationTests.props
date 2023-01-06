@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/xopS.IntegrationTests.props" />
+</Project>

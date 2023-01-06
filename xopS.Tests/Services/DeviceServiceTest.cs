@@ -66,12 +66,22 @@ public class DeviceServiceTest
 
         //---
         
-        var tmp = _deviceService.GetDevicesPage(0).ToList();
+        var page1 = _deviceService.GetDevicesPage(0).ToList();
+        
+        _deviceService.Remove(2);
+        
+        var page2 = _deviceService.GetDevicesPage(0).ToList();
         
         //---
         
         for (int i = 0; i < 2; i++){
-            Assert.AreEqual(tab[index[i]],tmp[i]);
+            Assert.AreEqual(tab[index[i]],page1[i]);
+        }
+        
+        Assert.AreEqual(2,page2.Count);
+        
+        for (int i = 0; i < 1; i++){
+            Assert.AreEqual(tab[index[i]],page2[i]);
         }
 
     }
@@ -89,10 +99,16 @@ public class DeviceServiceTest
         List<Device> page0 = _deviceService.GetDevicesPage(0).ToList();
         List<Device> page1 = _deviceService.GetDevicesPage(1).ToList();
 
+        DeviceService ds = new DeviceService(4);
+        
+        List<Device> page2 = ds.GetDevicesPage(0).ToList();
+        List<Device> page3 = ds.GetDevicesPage(1).ToList();
         //---
         
         Assert.AreEqual(3,page0.Count);
         Assert.AreEqual(2,page1.Count);
+        Assert.AreEqual(4,page2.Count);
+        Assert.AreEqual(1,page3.Count);
 
     }
 
@@ -196,6 +212,25 @@ public class DeviceServiceTest
         Assert.AreEqual(3,page0.Count);
         Assert.AreEqual(2,page1.Count);
 
+    }
+    
+    [TestMethod]
+    public void ToOdt()
+    {
+
+        List<Device> devices = new List<Device>() { DeviceFactor(), DeviceFactor(), DeviceFactor() };
+
+        //---
+
+        List<DeviceOdt> deviceOdts = DeviceService.ToOdt(devices).ToList();
+        
+        //---
+
+        Assert.AreEqual(3,deviceOdts.Count);
+        Assert.AreEqual(devices[1].OSVersion,deviceOdts[1].OSVersion);
+        Assert.AreEqual(devices[1].MachineName,deviceOdts[1].MachineName);
+        Assert.AreEqual(devices[1].UserName,deviceOdts[1].UserName);
+        Assert.AreEqual(devices[1].Time,deviceOdts[1].Time);
     }
     
 }

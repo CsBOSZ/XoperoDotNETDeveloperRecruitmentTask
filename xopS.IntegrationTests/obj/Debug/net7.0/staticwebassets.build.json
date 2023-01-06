@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "DRi7nlqt9YqEHylKZ1j9isgOVxG9uJC8mrKSEzF4Rxk=",
+  "Source": "xopS.IntegrationTests",
+  "BasePath": "_content/xopS.IntegrationTests",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/home/bogusz/RiderProjects/xopD/xopS/xopS.csproj",
+      "Version": 2,
+      "Source": "xopS",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
