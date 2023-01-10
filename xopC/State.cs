@@ -53,13 +53,11 @@ public class State
         Console.Write("------------\n option: ");
     }
     
-    public async void GetPage(int p)
+    public async Task GetPage(int p)
     {
         if (p>=0&&p<=MaxPage)
         {
             Page.Clear();
-            // var tmp = $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/{p}".GetAsync();
-            // Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
             Page.AddRange(await HttpDevice.GetPage(p,Mode));
             IndexPage = p;
             IndexName = "";
@@ -79,8 +77,6 @@ public class State
         if (p >= 0 && p <= MaxPageSearch)
         {
             Page.Clear();
-            // var tmp =  $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync();
-            // Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
             Page.AddRange(await HttpDevice.Search(name,p,Mode));
             IndexPage = p;
             IndexName = name;
