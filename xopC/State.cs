@@ -7,7 +7,7 @@ namespace xopC;
 
 public class State
 {
-    public State(int indexPage, string indexName, int maxPage, int maxPageSearch, List<DeviceOdt> page, bool mode)
+    public State(int indexPage, string indexName, int maxPage, int maxPageSearch, List<DeviceOdt> page, bool mode, IHttpDevice httpDevice)
     {
         IndexPage = indexPage;
         IndexName = indexName;
@@ -15,6 +15,7 @@ public class State
         MaxPageSearch = maxPageSearch;
         Page = page;
         Mode = mode;
+        HttpDevice = httpDevice;
     }
 
     public int IndexPage { get; set;}
@@ -23,6 +24,8 @@ public class State
     public int MaxPageSearch { get; set;}
     public List<DeviceOdt> Page { get; set;}
     public bool Mode { get; set;}
+
+    public readonly IHttpDevice HttpDevice;
     
     public void Print()
     {
@@ -54,9 +57,10 @@ public class State
     {
         if (p>=0&&p<=MaxPage)
         {
-            Page = new List<DeviceOdt>();
-            var tmp = $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/{p}".GetAsync();
-            Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
+            Page.Clear();
+            // var tmp = $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/{p}".GetAsync();
+            // Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
+            Page.AddRange(await HttpDevice.GetPage(p,Mode));
             IndexPage = p;
             IndexName = "";
             MaxPageSearch = 0;
@@ -71,12 +75,13 @@ public class State
     public async void Search(String name,int p)
     {
     
-        MaxPageSearch = await $"http://localhost:5076/Device/pages/{name}".GetAsync().ReceiveJson<int>();
+        MaxPageSearch = await HttpDevice.GetSearchPageCount(name);
         if (p >= 0 && p <= MaxPageSearch)
         {
             Page.Clear();
-            var tmp =  $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync();
-            Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
+            // var tmp =  $"http://localhost:5076/{(Mode ? "Device" : "DeviceOdt")}/searchByName/{name}/{p}".GetAsync();
+            // Page.AddRange(Mode ?await tmp.ReceiveJson<List<Device>>() : await tmp.ReceiveJson<List<DeviceOdt>>());
+            Page.AddRange(await HttpDevice.Search(name,p,Mode));
             IndexPage = p;
             IndexName = name;
             Print();

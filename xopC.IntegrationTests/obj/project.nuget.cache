@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6+CY6dDd8FwJmTYXnqKQWb0FnFwd0Y2mGIKgjx7gGvW9/u5mMT/08tN9/iqBdGswdAr4csRirsfAuMRaA3V8cQ==",
+  "dgSpecHash": "vSWKG5QzcEw1y8PmEPhC1wSQUcsGxYCmQp1BDWXT13lB0F1tDgNIi9LASv7vIiZQVsIoEFN5rn0F6/eejotDBw==",
   "success": true,
   "projectFilePath": "/home/bogusz/RiderProjects/xopD/xopC.IntegrationTests/xopC.IntegrationTests.csproj",
   "expectedPackageFiles": [
+    "/home/bogusz/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/home/bogusz/.nuget/packages/coverlet.collector/3.1.2/coverlet.collector.3.1.2.nupkg.sha512",
     "/home/bogusz/.nuget/packages/flurl/3.0.7/flurl.3.0.7.nupkg.sha512",
     "/home/bogusz/.nuget/packages/flurl.http/4.0.0-pre3/flurl.http.4.0.0-pre3.nupkg.sha512",
@@ -51,6 +52,7 @@
     "/home/bogusz/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
     "/home/bogusz/.nuget/packages/microsoft.testplatform.objectmodel/17.3.2/microsoft.testplatform.objectmodel.17.3.2.nupkg.sha512",
     "/home/bogusz/.nuget/packages/microsoft.testplatform.testhost/17.3.2/microsoft.testplatform.testhost.17.3.2.nupkg.sha512",
+    "/home/bogusz/.nuget/packages/moq/4.18.4/moq.4.18.4.nupkg.sha512",
     "/home/bogusz/.nuget/packages/mstest.testadapter/2.2.10/mstest.testadapter.2.2.10.nupkg.sha512",
     "/home/bogusz/.nuget/packages/mstest.testframework/2.2.10/mstest.testframework.2.2.10.nupkg.sha512",
     "/home/bogusz/.nuget/packages/newtonsoft.json/11.0.2/newtonsoft.json.11.0.2.nupkg.sha512",
@@ -64,6 +66,7 @@
     "/home/bogusz/.nuget/packages/system.codedom/7.0.0/system.codedom.7.0.0.nupkg.sha512",
     "/home/bogusz/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/home/bogusz/.nuget/packages/system.diagnostics.debug/4.3.0/system.diagnostics.debug.4.3.0.nupkg.sha512",
+    "/home/bogusz/.nuget/packages/system.diagnostics.eventlog/6.0.0/system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "/home/bogusz/.nuget/packages/system.diagnostics.textwritertracelistener/4.3.0/system.diagnostics.textwritertracelistener.4.3.0.nupkg.sha512",
     "/home/bogusz/.nuget/packages/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg.sha512",
     "/home/bogusz/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",

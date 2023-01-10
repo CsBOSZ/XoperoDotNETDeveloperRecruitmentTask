@@ -7,8 +7,8 @@ using xopS.Services;
 
 
 Device myDevice = MyDevice.GetMyDevice();
-
-State myState = new State(0, "", 0, 0,new List<DeviceOdt>(), false);
+IHttpDevice httpDevice = new HttpDevice("http://localhost:5076/");
+State myState = new State(0, "", 0, 0,new List<DeviceOdt>(), false,httpDevice);
 
 
 string url = "http://localhost:5076/devicehub";
@@ -29,9 +29,10 @@ await connection.StartAsync();
 
 // --------
 
-var post = await "http://localhost:5076/Device".PostJsonAsync(myDevice);
+// var post = await "http://localhost:5076/Device".PostJsonAsync(myDevice);
+await httpDevice.PostDevice(myDevice);
+//await connection.InvokeAsync<Task>("AddDevice", myDevice);
 
-// await connection.InvokeAsync<Task>("AddDevice", myDevice);
 
 for (;;)
 {
